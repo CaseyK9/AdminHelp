@@ -1,38 +1,38 @@
 ------------ Made By caprancTV ------------
 
-local helpCommand = "ahelp"
+local HelpCommand = "ahelp"
 
-local admins ={
-    "steam:11000010dbe40a2",
-    "steam:",
-    "steam:",
-    "steam:"
+local staff ={
+    "steam:11000010dbe40a2", -- Change this to add staff members
+    "steam:[ADD HEX HERE]",
+    "steam:[ADD HEX HERE]",
+    "steam:[ADD HEX HERE]" -- To add more copy and paste "steam: [ADD HEX HERE]" underneath (REMEMBER, when adding more, add a comma after!)
 }
 
-RegisterCommand(helpCommand, function(source, args, raw)
-    local message = table.concat(args, " ", 1)
-    local helpPerson = tonumber(args[1])
+RegisterCommand(HelpCommand, function(j, c)
+	local message = table.concat(c, " ")
+    local reportedPerson = tonumber(c[1])
 
     if message then
-        TriggerClientEvent("chatMessage", source, "^1Help Request Sent to Online Admins.")
-        TriggerClientEvent("SendHelpRequest", -1, source, message)
+        TriggerClientEvent("chatMessage", j, "^1Help request Sent to Online Admins.")
+        TriggerClientEvent("SendPlayerReport", -1, j, message)
     else
-        TriggerClientEvent("chatMessage", source, "^3Please specify a report message. \n^7Usage: /" .. helpCommand .. " Reason")
+        TriggerClientEvent("chatMessage", j, "^3Please specify a help message. \n^7Usage: /" .. HelpCommand .. " Reason")
     end
 end)
 
-RegisterServerEvent('SendHelpRequestToAdmins')
-AddEventHandler('SendHelpRequestToAdmins', function(helpingParty, message)
+RegisterServerEvent('SendhelpToAdmins')
+AddEventHandler('SendhelpToAdmins', function(needhelpingParty, message)
     local src = source
 
     if IsAdmin(src) then
-        TriggerClientEvent('chatMessage', src, "^*^4" .. GetPlayerName(helpingParty) .. " Needs Help With ^r" .. message)
+        TriggerClientEvent('chatMessage', src, "^*^4[".. GetPlayerName(needhelpingParty).."NEEDS HELP]^r" .. message)
     end
 end)
 
 function IsAdmin(id)
     local hex = GetPlayerIdentifiers(id)[1]
-    for k,v in pairs(admins) do
+    for k,v in pairs(staff) do
         if hex == v then
             return true
         end

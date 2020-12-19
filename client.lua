@@ -1,6 +1,6 @@
 ------------ Made By caprancTV ------------
 
-RegisterNetEvent('SendHelpRequest')
-AddEventHandler('SendHelpRequest', function(helpParty, message)
-	TriggerServerEvent("SendHelpRequestToAdmins", helpParty, message)
+RegisterNetEvent('SendPlayerHelp')
+AddEventHandler('SendPlayerHelp', function(needhelpingParty, message)
+	TriggerServerEvent("SendHelpRequestToStaff", needhelpingParty, message)
 end)
